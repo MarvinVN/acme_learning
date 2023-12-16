@@ -16,11 +16,11 @@ public class CourseService {
     public CourseRepository courseRepository;
 
     public Course createCourse(Course course) {
-        return (Course) courseRepository.save(course);
+        return courseRepository.save(course);
     }
 
     public Course getCourseById(Long courseId) throws Throwable {
-        return (Course) courseRepository.findById(courseId).orElseThrow(() -> new Exception("Course not found."));
+        return courseRepository.findById(courseId).orElseThrow(() -> new Exception("Course not found."));
     }
 
     public List<Course> getAllCourses() {
