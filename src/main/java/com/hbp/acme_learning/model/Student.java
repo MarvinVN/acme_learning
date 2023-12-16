@@ -8,8 +8,10 @@ import org.springframework.data.annotation.Id;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "STUDENT_TBL")
 public class Student {
     
     @Id
@@ -37,6 +39,10 @@ public class Student {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getPassword() {
+        return password;
     }
     
     public List<Course> getEnrolledCourses() {

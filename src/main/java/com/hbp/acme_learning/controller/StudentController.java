@@ -4,11 +4,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hbp.acme_learning.model.Student;
+import com.hbp.acme_learning.service.StudentService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
 
@@ -16,10 +18,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 @RequestMapping("/student")
 public class StudentController {
     
+    @Autowired
+    StudentService studentService;
+
     @PostMapping("/signup")
-    public String signUp(@RequestBody Student student) {
+    public Student signUp(@RequestBody Student student) {
         System.out.println(student); 
-        return "Successfully signed up";
+        return studentService.signUp(student.getName(), student.getEmail(), student.getPassword());
     }
 
     @PostMapping("/login")
