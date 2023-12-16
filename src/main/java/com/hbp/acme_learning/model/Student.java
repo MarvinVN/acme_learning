@@ -1,5 +1,8 @@
 package com.hbp.acme_learning.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 
 import jakarta.persistence.Entity;
@@ -15,6 +18,8 @@ public class Student {
     private String name;
     private String email;
     private String password;
+
+    private List<Course> enrolledCourses = new ArrayList<Course>();
 
     public Student(String name, String email, String password) {
         this.name = name;
@@ -33,6 +38,10 @@ public class Student {
     public String getEmail() {
         return email;
     }
+    
+    public List<Course> getEnrolledCourses() {
+        return enrolledCourses;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -40,6 +49,14 @@ public class Student {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void enrollCourse(Course course) {
+        enrolledCourses.add(course);
+    }
+
+    public void dropCourse(Course course) {
+        enrolledCourses.remove(course);
     }
 
     public String toString() {
