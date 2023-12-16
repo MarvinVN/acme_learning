@@ -45,10 +45,6 @@ public class Student {
         this.password = password;
     }
 
-    public List<Course> getEnrolledCourses() {
-        return enrolledCourses;
-    }
-
     public void enrollCourse(Course course) {
         enrolledCourses.add(course);
     }

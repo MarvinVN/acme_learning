@@ -42,10 +42,6 @@ public class Course {
         this.started = false;
     }
 
-    public List<Student> getEnrolledStudents() {
-        return enrolledStudents;
-    }
-
     public void enrollStudent(Student student) {
         enrolledStudents.add(student);
     }
