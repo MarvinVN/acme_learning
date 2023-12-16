@@ -59,8 +59,9 @@ public class Instructor {
         }
     }
 
-    public List<Course> listCourses() {
-        return courses;
+    public List<Student> getEnrolledStudents(Long courseId) throws Exception {
+        Course course = getCourseById(courseId);
+        return course.getEnrolledStudents();
     }
 
     private Course getCourseById(Long courseId) throws Exception {
