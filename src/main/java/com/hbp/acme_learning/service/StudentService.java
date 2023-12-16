@@ -23,9 +23,8 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
-    //should return student
-    public void login(String email, String password) {
-        return;
+    public Student login(String email, String password) {
+        return studentRepository.findByEmailAndPassword(email, password);
     }
 
     public void enrollCourse(Long studentId, Long courseId) throws Throwable {

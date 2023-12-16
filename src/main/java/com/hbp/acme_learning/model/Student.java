@@ -20,9 +20,10 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long studentId;
+    
     @Column
     private String name;
-    @Column
+    @Column(unique = true)
     private String email;
     @Column
     private String password;
@@ -33,6 +34,8 @@ public class Student {
         joinColumns = @JoinColumn(name = "student_id"),
         inverseJoinColumns = @JoinColumn(name = "course_id"))
     private List<Course> enrolledCourses = new ArrayList<Course>();
+
+    public Student(){}
 
     public Student(String name, String email, String password) {
         this.name = name;

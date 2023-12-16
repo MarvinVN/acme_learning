@@ -7,5 +7,7 @@ import com.hbp.acme_learning.model.Student;
 
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
+
+    public Student findByEmailAndPassword(String email, String password);
     
 }
