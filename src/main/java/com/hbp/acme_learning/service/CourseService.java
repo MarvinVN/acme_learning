@@ -29,7 +29,7 @@ public class CourseService {
 
     public void startCourse(Long courseId) throws Throwable {
         Course course = getCourseById(courseId);
-        course.start();
+        course.setStarted(true);
         courseRepository.save(course);
     }
 

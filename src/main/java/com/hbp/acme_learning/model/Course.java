@@ -9,11 +9,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 @Entity
 @Table(name = "COURSE_TABLE")
+@Getter @Setter @NoArgsConstructor
 public class Course {
     
     @Id
@@ -25,41 +30,20 @@ public class Course {
     @Column
     private boolean started;
 
+    @ManyToOne
+    private Instructor instructor;
+
     @ManyToMany(mappedBy = "enrolledCourses")
     private List<Student> enrolledStudents = new ArrayList<Student>();
 
-    public Course(Long courseId, String courseName) {
-        this.courseId = courseId;
+    public Course(String courseName, Instructor instructor) {
         this.courseName = courseName;
+        this.instructor = instructor;
         this.started = false;
     }
 
-    public Long getCourseId(){
-        return courseId;
-    }
-
-    public String getCourseName() {
-        return courseName;
-    }
-
-    public boolean isStarted() {
-        return started;
-    }
-    
     public List<Student> getEnrolledStudents() {
         return enrolledStudents;
-    }
-
-    public void setCourseId(Long courseId) {
-        this.courseId = courseId;
-    }
-
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
-    }
-
-    public void start() {
-        started = true;
     }
 
     public void enrollStudent(Student student) {
