@@ -28,12 +28,6 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
-    @GetMapping
-    public String test() {
-        return "endpoint reached";
-    }
-    
-
     @PostMapping("/signup")
     public Student signUp(@RequestBody SignUpRequest signUpRequest) throws SQLIntegrityConstraintViolationException {
         return studentService.signUp(signUpRequest.getName(), signUpRequest.getEmail(), signUpRequest.getPassword());
