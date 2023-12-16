@@ -21,6 +21,12 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
+    @GetMapping
+    public String test() {
+        return "endpoint reached";
+    }
+    
+
     @PostMapping("/signup")
     public Student signUp(@RequestBody Student student) {
         System.out.println(student); 
