@@ -20,7 +20,7 @@ public class StudentService {
 
     public Student signUp(String name, String email, String password) {
         Student student = new Student(name, email, password);
-        return (Student) studentRepository.save(student);
+        return studentRepository.save(student);
     }
 
     //should return student
@@ -29,7 +29,7 @@ public class StudentService {
     }
 
     public void enrollCourse(Long studentId, Long courseId) throws Throwable {
-        Student student = (Student) studentRepository.findById(studentId).orElseThrow(() -> new Exception("Student not found"));
+        Student student = studentRepository.findById(studentId).orElseThrow(() -> new Exception("Student not found"));
         Course course = courseService.getCourseById(courseId);
 
         if (!course.isStarted()) {
@@ -41,14 +41,14 @@ public class StudentService {
     }
 
     public void dropCourse(Long studentId, Long courseId) throws Throwable {
-        Student student = (Student) studentRepository.findById(studentId).orElseThrow(() -> new Exception("Student not found"));
+        Student student = studentRepository.findById(studentId).orElseThrow(() -> new Exception("Student not found"));
         Course course = courseService.getCourseById(courseId);
         student.dropCourse(course);
-        studentRepository.save(course);
+        studentRepository.save(student);
     }
 
     public List<Course> listEnrolledCourses(Long studentId) throws Throwable {
-        Student student = (Student) studentRepository.findById(studentId).orElseThrow(() -> new Exception("Student not found"));
+        Student student = studentRepository.findById(studentId).orElseThrow(() -> new Exception("Student not found"));
         return student.getEnrolledCourses();
     }
 
