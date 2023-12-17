@@ -34,22 +34,19 @@ public class InstructorController {
     @PostMapping("/signup")
     public InstructorDTO signUp(@RequestBody SignUpRequest signUpRequest) throws SQLIntegrityConstraintViolationException {
         Instructor instructor = instructorService.signUp(signUpRequest.getName(), signUpRequest.getEmail(), signUpRequest.getPassword());
-        InstructorDTO instructorDTO = DTOConverter.instructorToDTO(instructor);
-        return instructorDTO;
+        return DTOConverter.instructorToDTO(instructor);
     }
 
     @PostMapping("/login")
     public InstructorDTO login(@RequestBody LoginRequest loginRequest) {
         Instructor instructor = instructorService.login(loginRequest.getEmail(), loginRequest.getPassword());
-        InstructorDTO instructorDTO = DTOConverter.instructorToDTO(instructor);
-        return instructorDTO;
+        return DTOConverter.instructorToDTO(instructor);
     }
 
     @PostMapping("/{instructorId}/create-course/{courseName}")
     public CourseDTO createCourse(@PathVariable Long instructorId, @PathVariable String courseName) throws Exception {
         Course course = instructorService.createCourse(instructorId, courseName);
-        CourseDTO courseDTO = DTOConverter.courseToDTO(course);
-        return courseDTO;
+        return DTOConverter.courseToDTO(course);
     }
 
     @PostMapping("/{instructorId}/course/{courseId}/start")

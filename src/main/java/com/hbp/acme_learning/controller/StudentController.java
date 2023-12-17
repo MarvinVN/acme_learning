@@ -3,6 +3,9 @@ package com.hbp.acme_learning.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hbp.acme_learning.dto.CourseDTO;
+import com.hbp.acme_learning.dto.DTOConverter;
+import com.hbp.acme_learning.dto.StudentDTO;
 import com.hbp.acme_learning.model.Course;
 import com.hbp.acme_learning.model.Student;
 import com.hbp.acme_learning.service.StudentService;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,13 +33,15 @@ public class StudentController {
     StudentService studentService;
 
     @PostMapping("/signup")
-    public Student signUp(@RequestBody SignUpRequest signUpRequest) throws SQLIntegrityConstraintViolationException {
-        return studentService.signUp(signUpRequest.getName(), signUpRequest.getEmail(), signUpRequest.getPassword());
+    public StudentDTO signUp(@RequestBody SignUpRequest signUpRequest) throws SQLIntegrityConstraintViolationException {
+        Student student = studentService.signUp(signUpRequest.getName(), signUpRequest.getEmail(), signUpRequest.getPassword());
+        return DTOConverter.studentToDTO(student);
     }
 
     @PostMapping("/login")
-    public Student login(@RequestBody LoginRequest loginRequest) {
-        return studentService.login(loginRequest.getEmail(), loginRequest.getPassword());
+    public StudentDTO login(@RequestBody LoginRequest loginRequest) {
+        Student student = studentService.login(loginRequest.getEmail(), loginRequest.getPassword());
+        return DTOConverter.studentToDTO(student);
     }
 
     @PostMapping("/{studentId}/enroll/{courseId}")
@@ -49,13 +55,19 @@ public class StudentController {
     }
     
     @GetMapping("/{studentId}/enrolled-courses")
-    public List<Course> listEnrolledCourses(@PathVariable Long studentId) throws Throwable {
-        return studentService.listEnrolledCourses(studentId);
+    public List<CourseDTO> listEnrolledCourses(@PathVariable Long studentId) throws Throwable {
+        List<Course> enrolledCourses = studentService.listEnrolledCourses(studentId);
+        return enrolledCourses.stream()
+                    .map(DTOConverter::courseToDTO)
+                    .collect(Collectors.toList());
     }
 
     @GetMapping("/all-courses")
-    public List<Course> listAllCourses() {
-        return studentService.listAllCourses();
+    public List<CourseDTO> listAllCourses() {
+        List<Course> courses = studentService.listAllCourses();
+        return courses.stream()
+                    .map(DTOConverter::courseToDTO)
+                    .collect(Collectors.toList());
     }
     
 }
