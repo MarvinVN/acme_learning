@@ -36,13 +36,16 @@ public class CourseService {
     public void cancelCourse(Long courseId) throws Throwable {
         Course course = getCourseById(courseId);
         if (!course.isStarted()) {
+            List<Student> enrolledStudents = getEnrolledStudents(courseId);
+            enrolledStudents.stream()
+                            .forEach(student -> student.dropCourse(course));
             courseRepository.delete(course);
         } else {
             throw new Exception("Cannot cancel in-progress class.");
         }
     }
 
-    public List<Student> listEnrolledStudents(Long courseId) throws Throwable {
+    public List<Student> getEnrolledStudents(Long courseId) throws Throwable {
         Course course = getCourseById(courseId);
         return course.getEnrolledStudents();
     }

@@ -49,7 +49,7 @@ public class StudentController {
         studentService.enrollCourse(studentId, courseId);
     }
 
-    @DeleteMapping("/{studentId}/drop{courseId}/")
+    @DeleteMapping("/{studentId}/drop/{courseId}")
     public void dropCourse(@PathVariable Long studentId, @PathVariable Long courseId) throws Throwable {
         studentService.dropCourse(studentId, courseId);
     }

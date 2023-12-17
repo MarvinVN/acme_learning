@@ -33,6 +33,7 @@ public class StudentService {
 
         if (!course.isStarted()) {
             student.enrollCourse(course);
+            studentRepository.save(student);
         } else {
             throw new Exception("Cannot join in-progress course.");
         }
