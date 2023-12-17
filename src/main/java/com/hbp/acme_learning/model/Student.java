@@ -45,6 +45,12 @@ public class Student {
         this.password = password;
     }
 
+    public Student(Long studentId, String name, String email) {
+        this.studentId = studentId;
+        this.name = name;
+        this.email = email;
+    }
+
     public void enrollCourse(Course course) {
         enrolledCourses.add(course);
     }

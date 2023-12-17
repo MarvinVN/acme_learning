@@ -39,6 +39,12 @@ public class Instructor {
         this.password = password;
     }
 
+    public Instructor(Long instructorId, String name, String email) {
+        this.instructorId = instructorId;
+        this.name = name;
+        this.email = email;
+    }
+
     public Course createCourse(String courseName) {
         Course course = new Course(courseName, this);
         courses.add(course);

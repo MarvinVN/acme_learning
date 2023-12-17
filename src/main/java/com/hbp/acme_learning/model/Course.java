@@ -42,6 +42,12 @@ public class Course {
         this.started = false;
     }
 
+    public Course(Long courseId, String courseName, boolean started) {
+        this.courseId = courseId;
+        this.courseName = courseName;
+        this.started = started;
+    }
+
     public void enrollStudent(Student student) {
         enrolledStudents.add(student);
     }
