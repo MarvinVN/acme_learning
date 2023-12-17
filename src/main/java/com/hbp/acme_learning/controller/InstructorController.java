@@ -50,12 +50,12 @@ public class InstructorController {
     }
 
     @PostMapping("/{instructorId}/course/{courseId}/start")
-    public void startCourse(@PathVariable Long instructorId, @PathVariable Long courseId) throws Exception {
+    public void startCourse(@PathVariable Long instructorId, @PathVariable Long courseId) throws Throwable {
         instructorService.startCourse(instructorId, courseId);
     }
 
     @PostMapping("/{instructorId}/course/{courseId}/cancel")
-    public void cancelCourse(@PathVariable Long instructorId, @PathVariable Long courseId) throws Exception {
+    public void cancelCourse(@PathVariable Long instructorId, @PathVariable Long courseId) throws Throwable {
         instructorService.cancelCourse(instructorId, courseId);
     }
 

@@ -16,6 +16,9 @@ public class InstructorService {
     @Autowired
     public InstructorRepository instructorRepository;
 
+    @Autowired
+    public CourseService courseService;
+
     public Instructor signUp(String name, String email, String password) {
         Instructor instructor = new Instructor(name, email, password);
         return instructorRepository.save(instructor);
@@ -27,17 +30,20 @@ public class InstructorService {
 
     public Course createCourse(Long instructorId, String courseName) throws Exception {
         Instructor instructor = instructorRepository.findById(instructorId).orElseThrow(() -> new Exception("Instructor not found."));
-        return instructor.createCourse(courseName);
+        Course course = instructor.createCourse(courseName);
+        return courseService.createCourse(course);
     }
 
-    public void startCourse(Long instructorId, Long courseId) throws Exception {
+    public void startCourse(Long instructorId, Long courseId) throws Throwable {
         Instructor instructor = instructorRepository.findById(instructorId).orElseThrow(() -> new Exception("Instructor not found."));
         instructor.startCourse(courseId);
+        courseService.startCourse(courseId);
     }
 
-    public void cancelCourse(Long instructorId, Long courseId) throws Exception {
+    public void cancelCourse(Long instructorId, Long courseId) throws Throwable {
         Instructor instructor = instructorRepository.findById(instructorId).orElseThrow(() -> new Exception("Instructor not found."));
         instructor.cancelCourse(courseId);
+        courseService.cancelCourse(courseId);
     }
     
     public List<Course> listCourses(Long instructorId) throws Exception {
