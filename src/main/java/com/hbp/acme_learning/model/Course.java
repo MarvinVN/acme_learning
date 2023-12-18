@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -31,6 +32,7 @@ public class Course {
     private boolean started;
 
     @ManyToOne
+    @JoinColumn(name = "instructor_id")
     private Instructor instructor;
 
     @ManyToMany(mappedBy = "enrolledCourses")
@@ -54,5 +56,9 @@ public class Course {
 
     public void removeStudent(Student student) {
         enrolledStudents.remove(student);
+    }
+
+    public Object thenReturn(Course expectedCourse) {
+        return null;
     }
 }

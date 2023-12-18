@@ -31,7 +31,7 @@ public class Instructor {
     private String password;
 
     @OneToMany(mappedBy = "instructor")
-    private List<Course> courses = new ArrayList<Course>();
+    private List<Course> courses = new ArrayList<>();
 
     public Instructor(String name, String email, String password) {
         this.name = name;
