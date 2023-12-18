@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,47 +34,52 @@ public class InstructorController {
     InstructorService instructorService;
 
     @PostMapping("/signup")
-    public InstructorDTO signUp(@RequestBody SignUpRequest signUpRequest) throws SQLIntegrityConstraintViolationException {
+    public ResponseEntity<InstructorDTO> signUp(@RequestBody SignUpRequest signUpRequest) throws SQLIntegrityConstraintViolationException {
         Instructor instructor = instructorService.signUp(signUpRequest.getName(), signUpRequest.getEmail(), signUpRequest.getPassword());
-        return DTOConverter.instructorToDTO(instructor);
+        InstructorDTO instructorDTO = DTOConverter.instructorToDTO(instructor);
+        return new ResponseEntity<>(instructorDTO, HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
-    public InstructorDTO login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<InstructorDTO> login(@RequestBody LoginRequest loginRequest) {
         Instructor instructor = instructorService.login(loginRequest.getEmail(), loginRequest.getPassword());
-        return DTOConverter.instructorToDTO(instructor);
+        InstructorDTO instructorDTO = DTOConverter.instructorToDTO(instructor);
+        return new ResponseEntity<>(instructorDTO, HttpStatus.OK);
     }
 
     @PostMapping("/{instructorId}/create-course/{courseName}")
-    public CourseDTO createCourse(@PathVariable Long instructorId, @PathVariable String courseName) throws Exception {
+    public ResponseEntity<CourseDTO> createCourse(@PathVariable Long instructorId, @PathVariable String courseName) throws Exception {
         Course course = instructorService.createCourse(instructorId, courseName);
-        return DTOConverter.courseToDTO(course);
+        CourseDTO courseDTO = DTOConverter.courseToDTO(course);
+        return new ResponseEntity<>(courseDTO, HttpStatus.CREATED);
     }
 
     @PostMapping("/{instructorId}/course/{courseId}/start")
-    public void startCourse(@PathVariable Long instructorId, @PathVariable Long courseId) throws Throwable {
+    public ResponseEntity<Void> startCourse(@PathVariable Long instructorId, @PathVariable Long courseId) throws Throwable {
         instructorService.startCourse(instructorId, courseId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/{instructorId}/course/{courseId}/cancel")
-    public void cancelCourse(@PathVariable Long instructorId, @PathVariable Long courseId) throws Throwable {
+    public ResponseEntity<Void> cancelCourse(@PathVariable Long instructorId, @PathVariable Long courseId) throws Throwable {
         instructorService.cancelCourse(instructorId, courseId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/{instructorId}/courses")
-    public List<CourseDTO> listCourses(@PathVariable Long instructorId) throws Exception {
+    public ResponseEntity<List<CourseDTO>> listCourses(@PathVariable Long instructorId) throws Exception {
         List<Course> courses = instructorService.listCourses(instructorId);
-        return courses.stream()
-                    .map(DTOConverter::courseToDTO)
-                    .collect(Collectors.toList());
+        return new ResponseEntity<>(courses.stream()
+                                        .map(DTOConverter::courseToDTO)
+                                        .collect(Collectors.toList()), HttpStatus.OK);
     }
 
     @GetMapping("/{instructorId}/course/{courseId}/students")
-    public List<StudentDTO> listEnrolledStudents(@PathVariable Long instructorId, @PathVariable Long courseId) throws Exception {
+    public ResponseEntity<List<StudentDTO>> listEnrolledStudents(@PathVariable Long instructorId, @PathVariable Long courseId) throws Exception {
         List<Student> enrolledStudents = instructorService.listEnrolledStudents(instructorId, courseId);
-        return enrolledStudents.stream()
-                    .map(DTOConverter::studentToDTO)
-                    .collect(Collectors.toList());
+        return new ResponseEntity<>(enrolledStudents.stream()
+                                                .map(DTOConverter::studentToDTO)
+                                                .collect(Collectors.toList()), HttpStatus.OK);
     }
     
 }

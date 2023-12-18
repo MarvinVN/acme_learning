@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,16 +24,18 @@ public class CourseController {
     public CourseService courseService;
 
     @GetMapping("/{courseId}")
-    public Course getCourse(@PathVariable Long courseId) throws Throwable {
-        return courseService.getCourseById(courseId);
+    public ResponseEntity<CourseDTO> getCourse(@PathVariable Long courseId) throws Throwable {
+        Course course = courseService.getCourseById(courseId); 
+        CourseDTO courseDTO = DTOConverter.courseToDTO(course);
+        return new ResponseEntity<>(courseDTO, HttpStatus.OK);
     }
 
     @GetMapping("/all")
-    public List<CourseDTO> getAllCourses() {
+    public ResponseEntity<List<CourseDTO>> getAllCourses() {
         List<Course> courses = courseService.getAllCourses();
-        return courses.stream()
-                    .map(DTOConverter::courseToDTO)
-                    .collect(Collectors.toList());
+        return new ResponseEntity<>(courses.stream()
+                                        .map(DTOConverter::courseToDTO)
+                                        .collect(Collectors.toList()), HttpStatus.OK);
     }
     
 }
