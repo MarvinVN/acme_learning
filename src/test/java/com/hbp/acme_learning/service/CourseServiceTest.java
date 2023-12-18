@@ -33,7 +33,7 @@ public class CourseServiceTest {
     CourseService courseService;
 
     @Test
-    public void createCourse() {
+    public void createCourseTest() {
 
         Course expectedCourse = new Course();
         Course resultCourse;
@@ -47,7 +47,7 @@ public class CourseServiceTest {
     }
 
     @Test
-    public void getCourseById() throws Throwable {
+    public void getCourseByIdTest() throws Throwable {
 
         Long courseId = 1L;
         Course expectedCourse = new Course();
@@ -62,7 +62,7 @@ public class CourseServiceTest {
     }
     
     @Test
-    public void getAllCourses() {
+    public void getAllCoursesTest() {
 
         List<Course> expectedCourses = Arrays.asList(new Course());
         List<Course> resultCourses;
@@ -76,7 +76,7 @@ public class CourseServiceTest {
     }
     
     @Test
-    public void startCourse() throws Throwable {
+    public void startCourseTest() throws Throwable {
 
         Long courseId = 1L;
         Course course = new Course(courseId, "NAME", false);
@@ -92,7 +92,7 @@ public class CourseServiceTest {
     }
     
     @Test
-    public void cancelCourse() throws Throwable {
+    public void cancelCourseTest() throws Throwable {
 
         Long courseId = 1L;
         Course course = new Course(courseId, "NAME", false);
@@ -105,7 +105,7 @@ public class CourseServiceTest {
     }
     
     @Test
-    public void getEnrolledStudents() throws Throwable {
+    public void getEnrolledStudentsTest() throws Throwable {
 
         /* 
         Long courseId = 1L;
