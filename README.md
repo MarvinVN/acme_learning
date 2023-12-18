@@ -1,6 +1,7 @@
-# Foobar
+# ACME Learning Application
 
-Foobar is a Python library for dealing with word pluralization.
+
+REST API for HBP code assessment
 
 ## Installation
 
