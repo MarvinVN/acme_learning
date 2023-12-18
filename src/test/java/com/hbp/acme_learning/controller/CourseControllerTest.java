@@ -38,7 +38,6 @@ public class CourseControllerTest {
         ResponseEntity<CourseDTO> response;
         Long courseId = 1L;
         Course expectedCourse = new Course(1L, "MATH100", false);
-        CourseDTO expectedCourseDTO = DTOConverter.courseToDTO(expectedCourse);
 
         when(courseService.getCourseById(anyLong())).thenReturn(expectedCourse);
         response = courseController.getCourse(courseId);
