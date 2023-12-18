@@ -1,0 +1,327 @@
+{
+	"info": {
+		"_postman_id": "f18e4a3b-47ca-4e27-b54b-4746b959267e",
+		"name": "HBP Assessment Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31839111"
+	},
+	"item": [
+		{
+			"name": "Instructor: Sign Up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"John Smith\",\r\n    \"email\": \"johnsmith@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/instructor/signup",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"instructor",
+						"signup"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "John Smith",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "johnsmith@gmail.com",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Student: Sign Up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"John Doe\",\r\n    \"email\": \"JohnDoe@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/student/signup",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Instructor: Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"johnsmith@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/instructor/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"instructor",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Student: Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"JohnDoe@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/student/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Instructor: Create Course",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/instructor/1/create-course/MATH100",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"instructor",
+						"1",
+						"create-course",
+						"MATH100"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Instructor: List Courses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/instructor/1/courses",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"instructor",
+						"1",
+						"courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Instructor: Start Course",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/instructor/1/course/1/start",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"instructor",
+						"1",
+						"course",
+						"1",
+						"start"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Instructor: Cancel Course",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/instructor/1/course/1/cancel",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"instructor",
+						"1",
+						"course",
+						"1",
+						"cancel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Student: Get All Courses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/student/all-courses",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student",
+						"all-courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Student: Enroll Course",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/student/1/enroll/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student",
+						"1",
+						"enroll",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Student: Drop Course",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/student/1/drop/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student",
+						"1",
+						"drop",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Student: Get Enrolled Courses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/student/1/enrolled-courses",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student",
+						"1",
+						"enrolled-courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Instructor: List Students In Course",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/instructor/1/course/1/students",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"instructor",
+						"1",
+						"course",
+						"1",
+						"students"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
