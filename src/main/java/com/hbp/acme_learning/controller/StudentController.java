@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
 
@@ -33,41 +35,45 @@ public class StudentController {
     StudentService studentService;
 
     @PostMapping("/signup")
-    public StudentDTO signUp(@RequestBody SignUpRequest signUpRequest) throws SQLIntegrityConstraintViolationException {
+    public ResponseEntity<StudentDTO> signUp(@RequestBody SignUpRequest signUpRequest) throws SQLIntegrityConstraintViolationException {
         Student student = studentService.signUp(signUpRequest.getName(), signUpRequest.getEmail(), signUpRequest.getPassword());
-        return DTOConverter.studentToDTO(student);
+        StudentDTO studentDTO = DTOConverter.studentToDTO(student);
+        return new ResponseEntity<>(studentDTO, HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
-    public StudentDTO login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<StudentDTO> login(@RequestBody LoginRequest loginRequest) {
         Student student = studentService.login(loginRequest.getEmail(), loginRequest.getPassword());
-        return DTOConverter.studentToDTO(student);
+        StudentDTO studentDTO = DTOConverter.studentToDTO(student);
+        return new ResponseEntity<>(studentDTO, HttpStatus.OK);
     }
 
     @PostMapping("/{studentId}/enroll/{courseId}")
-    public void enrollCourse(@PathVariable Long studentId, @PathVariable Long courseId) throws Throwable {
+    public ResponseEntity<Void> enrollCourse(@PathVariable Long studentId, @PathVariable Long courseId) throws Throwable {
         studentService.enrollCourse(studentId, courseId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/{studentId}/drop/{courseId}")
-    public void dropCourse(@PathVariable Long studentId, @PathVariable Long courseId) throws Throwable {
+    public ResponseEntity<Void> dropCourse(@PathVariable Long studentId, @PathVariable Long courseId) throws Throwable {
         studentService.dropCourse(studentId, courseId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     
     @GetMapping("/{studentId}/enrolled-courses")
-    public List<CourseDTO> listEnrolledCourses(@PathVariable Long studentId) throws Throwable {
+    public ResponseEntity<List<CourseDTO>> listEnrolledCourses(@PathVariable Long studentId) throws Throwable {
         List<Course> enrolledCourses = studentService.listEnrolledCourses(studentId);
-        return enrolledCourses.stream()
-                    .map(DTOConverter::courseToDTO)
-                    .collect(Collectors.toList());
+        return new ResponseEntity<>(enrolledCourses.stream()
+                                                .map(DTOConverter::courseToDTO)
+                                                .collect(Collectors.toList()), HttpStatus.OK);
     }
 
     @GetMapping("/all-courses")
-    public List<CourseDTO> listAllCourses() {
+    public ResponseEntity<List<CourseDTO>> listAllCourses() {
         List<Course> courses = studentService.listAllCourses();
-        return courses.stream()
-                    .map(DTOConverter::courseToDTO)
-                    .collect(Collectors.toList());
+        return new ResponseEntity<>(courses.stream()
+                                        .map(DTOConverter::courseToDTO)
+                                        .collect(Collectors.toList()), HttpStatus.OK);
     }
     
 }
