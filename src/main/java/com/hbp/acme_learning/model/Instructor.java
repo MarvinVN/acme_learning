@@ -77,4 +77,8 @@ public class Instructor {
                     .orElseThrow(() -> new Exception("Course not found."));
     }
 
+    protected void addCourse(Course course) {
+        courses.add(course);
+    }
+
 }

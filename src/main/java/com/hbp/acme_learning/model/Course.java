@@ -57,8 +57,4 @@ public class Course {
     public void removeStudent(Student student) {
         enrolledStudents.remove(student);
     }
-
-    public Object thenReturn(Course expectedCourse) {
-        return null;
-    }
 }
