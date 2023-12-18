@@ -64,16 +64,16 @@ public class StudentControllerTest {
         ResponseEntity<StudentDTO> response;
         String email = "johnsmith@gmail.com";
         String password = "password";
-        Student expecedStudent = new Student("John Smith", email, password);
+        Student expectedStudent = new Student("John Smith", email, password);
         Student resultStudent;
 
-        when(studentService.login(anyString(), anyString())).thenReturn(expecedStudent);
+        when(studentService.login(anyString(), anyString())).thenReturn(expectedStudent);
         response = studentController.login(new LoginRequest(email, password));
         resultStudent = DTOConverter.DTOToStudent(response.getBody());
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(expecedStudent.getName(), resultStudent.getName());
-        assertEquals(expecedStudent.getEmail(), resultStudent.getEmail());
+        assertEquals(expectedStudent.getName(), resultStudent.getName());
+        assertEquals(expectedStudent.getEmail(), resultStudent.getEmail());
 
     }
 
