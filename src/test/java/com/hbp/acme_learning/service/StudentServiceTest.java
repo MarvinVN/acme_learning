@@ -114,7 +114,7 @@ public class StudentServiceTest {
     @Test
     public void listAllCoursesTest() {
 
-        List<Course> resultCourses = studentService.listAllCourses();
+        studentService.listAllCourses();
 
         verify(courseService, times(1)).getAllCourses();
 

@@ -107,19 +107,17 @@ public class CourseServiceTest {
     @Test
     public void getEnrolledStudentsTest() throws Throwable {
 
-        /* 
         Long courseId = 1L;
         Course course = new Course(courseId, "NAME", false);
         Student student = new Student(courseId, "name", "email");
         List<Student> expectedStudents = Arrays.asList(student);
         List<Student> resultStudents;
 
-        student.enrollCourse(course);
+        course.enrollStudent(student);
         when(courseRepository.findById(courseId)).thenReturn(Optional.of(course));
         resultStudents = courseService.getEnrolledStudents(courseId);
 
         assertEquals(expectedStudents, resultStudents);
-        */
 
     }
     

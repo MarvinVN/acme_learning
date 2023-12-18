@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.hbp.acme_learning.model.Course;
 import com.hbp.acme_learning.model.Instructor;
 import com.hbp.acme_learning.model.Student;
+import com.hbp.acme_learning.repository.CourseRepository;
 import com.hbp.acme_learning.repository.InstructorRepository;
 
 @Service
@@ -18,6 +19,9 @@ public class InstructorService {
 
     @Autowired
     public CourseService courseService;
+
+    @Autowired
+    public CourseRepository courseRepository;
 
     public Instructor signUp(String name, String email, String password) {
         Instructor instructor = new Instructor(name, email, password);
@@ -31,7 +35,7 @@ public class InstructorService {
     public Course createCourse(Long instructorId, String courseName) throws Exception {
         Instructor instructor = instructorRepository.findById(instructorId).orElseThrow(() -> new Exception("Instructor not found."));
         Course course = instructor.createCourse(courseName);
-        return courseService.createCourse(course);
+        return courseRepository.save(course);
     }
 
     public void startCourse(Long instructorId, Long courseId) throws Throwable {

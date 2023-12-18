@@ -1,6 +1,7 @@
 package com.hbp.acme_learning.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.times;
@@ -33,6 +34,9 @@ public class InstructorServiceTest {
 
     @Mock
     CourseRepository courseRepository;
+
+    @Mock
+    CourseService courseService;
 
     @InjectMocks
     InstructorService instructorService;
@@ -73,7 +77,6 @@ public class InstructorServiceTest {
     @Test
     public void createCourseTest() throws Exception {
         
-        /*
         Long instructorId = 1L;
         String courseName = "MATH100";
         Course expectedCourse = new Course(1L, courseName, false);
@@ -85,13 +88,11 @@ public class InstructorServiceTest {
 
         verify(courseRepository, times(1)).save(any());
         assertEquals(expectedCourse, resultCourse);
-        */
 
     }
 
     @Test
     public void startCourseTest() throws Throwable {
-        
         /*
         Long instructorId = 1L;
         Long courseId = 1L;
@@ -100,12 +101,12 @@ public class InstructorServiceTest {
         Course course = instructor.createCourse("COURSE");
 
         when(instructorRepository.findById(anyLong())).thenReturn(Optional.of(instructor));
+        when(courseRepository.findById(courseId)).thenReturn(Optional.of(course));
         instructorService.startCourse(instructorId, courseId);
 
         verify(courseRepository, times(1)).save(any());
         assertTrue(course.isStarted());
         */
-
     }
 
     @Test
