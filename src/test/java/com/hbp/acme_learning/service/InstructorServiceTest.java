@@ -18,7 +18,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 
 import com.hbp.acme_learning.model.Course;
 import com.hbp.acme_learning.model.Instructor;
@@ -26,7 +25,6 @@ import com.hbp.acme_learning.model.Student;
 import com.hbp.acme_learning.repository.CourseRepository;
 import com.hbp.acme_learning.repository.InstructorRepository;
 
-@WebMvcTest(InstructorServiceTest.class)
 @ExtendWith(MockitoExtension.class)
 public class InstructorServiceTest {
     

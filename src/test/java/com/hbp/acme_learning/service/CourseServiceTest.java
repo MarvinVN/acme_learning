@@ -18,13 +18,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 
 import com.hbp.acme_learning.model.Course;
 import com.hbp.acme_learning.model.Student;
 import com.hbp.acme_learning.repository.CourseRepository;
 
-@WebMvcTest(CourseServiceTest.class)
 @ExtendWith(MockitoExtension.class)
 public class CourseServiceTest {
     
@@ -122,7 +120,7 @@ public class CourseServiceTest {
 
         assertEquals(expectedStudents, resultStudents);
         */
-        
+
     }
     
 
